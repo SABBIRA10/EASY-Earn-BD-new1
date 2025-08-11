@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <title>EASY EARN BD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- AD SDK SCRIPT -->
+  <script src='//libtl.com/sdk.js' data-zone='9697264' data-sdk='show_9697264'></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+    }
+    
+    body {
+      margin: 0;
+      padding: 20px 15px;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      color: #f0f0f0;
+    }
+    
+    body.dark-theme {
+      background: linear-gradient(135deg, #0a061e, #1d1940, #141329);
+    }
+    
+    .hidden { display: none !important; }
+    
+    .app, .ad-page, .referral-page, .notice-page, .withdraw-page, 
+    .settings-page, .support-page, .profile-page, .history-page,
+    .welcome-page {
+      background: rgba(30, 26, 62, 0.65);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 25px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+    }
+    
+    .app-name {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #00b09b, #96c93d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    
+    .balance-section {
+      background: linear-gradient(135deg, #1a1a3a, #2d2b55);
+      color: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 25px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(0, 176, 155, 0.15);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+    
+    .balance-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #00b09b, #96c93d);
+    }
+    
+    .balance-section h2 { 
+      margin: 0 0 8px; 
+      font-size: 22px; 
+      font-weight: 600;
+    }
+    
+    .balance-section p { 
+      margin: 6px 0; 
+      font-size: 16px; 
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    
+    .balance-section strong {
+      font-weight: 600;
+      color: #f0f0f0;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+    
+    .card {
+      background: linear-gradient(135deg, rgba(40, 36, 76, 0.7), rgba(30, 26, 62, 0.5));
+      border-radius: 16px;
+      padding: 18px 8px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      border-color: rgba(0, 176, 155, 0.25);
+    }
+    
+    .card i {
+      font-size: 24px;
+      color: #00b09b;
+      margin-bottom: 10px;
+    }
+    
+    .card span {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    
+    .back-btn {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #f0f0f0;
+      cursor: pointer;
+      background: rgba(40, 36, 76, 0.7);
+      border-radius: 10px;
+      padding: 10px 15px;
+      width: fit-content;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .back-btn:hover {
+      background: rgba(50, 46, 86, 0.8);
+      transform: translateX(-3px);
+    }
+    
+    .quiz-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    
+    .quiz-buttons button {
+      background: linear-gradient(135deg, #00b09b, #96c93d);
+      color: #1a1a2e;
+      border: none;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 12px;
+      width: 100%;
+      cursor: pointer;
+      box-shadow: 0 5px 14px rgba(0, 176, 155, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .quiz-buttons button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 18px rgba(0, 176, 155, 0.4);
+    }
+    
+    .modal {
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(10, 6, 30, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modal-content {
+      background: linear-gradient(135deg, #1a1a3a, #2d2b55);
+      padding: 25px;
+      border-radius: 18px;
+      width: 90%;
+      max-width: 380px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(0, 176, 155, 0.15);
+    }
+    
+    .modal .close {
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #00b09b;
+    }
+    
+    .quiz-question {
+      font-weight: 600;
+      margin-bottom: 20px;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    
+    .timer {
+      font-size: 16px;
+      color: #00b09b;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    
+    .quiz-options button {
+      background: rgba(40, 36, 76, 0.7);
+      color: #f0f0f0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 12px;
+      margin: 10px 0;
+      width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    
+    .referral-page input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 14px;
+      background: rgba(40, 36, 76, 0.5);
+      color: #f0f0f0;
+      margin-bottom: 12px;
+    }
+    
+    .notice-content, .withdraw-form, .theme-options, .support-options, .user-stats, .history-item {
+      background: rgba(40, 36, 76, 0.6);
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    .notice-content h2, .withdraw-form h2, .support-options h2, .profile-page h2, .history-page h2 {
+      color: #00b09b;
+      margin-top: 0;
+      text-align: center;
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+    
+    .notice-content p, .withdraw-form p, .support-options p, .user-stats p {
+      line-height: 1.6;
+      font-size: 15px;
+      margin-bottom: 12px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    
+    .theme-btn, .support-btn {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 16px;
+      margin: 15px 0;
+      border-radius: 14px;
+      cursor: pointer;
+      background: rgba(40, 36, 76, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-weight: 600;
+    }
+    
+    .theme-btn i, .support-btn i {
+      margin-right: 12px;
+      font-size: 22px;
+      color: #00b09b;
+    }
+    
+    .withdraw-form input, .withdraw-form select {
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 15px;
+      background: rgba(40, 36, 76, 0.5);
+      color: #f0f0f0;
+    }
+    
+    .withdraw-form button {
+      background: linear-gradient(135deg, #00b09b, #96c93d);
+      color: #1a1a2e;
+      border: none;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 12px;
+      width: 100%;
+      cursor: pointer;
+      margin-top: 15px;
+      box-shadow: 0 5px 14px rgba(0, 176, 155, 0.3);
+    }
+    
+    .user-stats div {
+      margin: 12px 0;
+      padding: 12px;
+      background: rgba(30, 26, 62, 0.5);
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    .history-item {
+      margin-bottom: 15px;
+      padding: 18px;
+      background: rgba(40, 36, 76, 0.6);
+      border-radius: 14px;
+      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    .level-bar {
+      height: 14px;
+      background-color: rgba(40, 36, 76, 0.8);
+      border-radius: 8px;
+      margin: 15px 0 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+    
+    .level-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #ff8c00, #ff0080, #00b09b);
+      border-radius: 8px;
+      transition: width 0.5s ease;
+    }
+    
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .section-title i {
+      font-size: 24px;
+      color: #00b09b;
+    }
+    
+    .copy-btn {
+      background: rgba(40, 36, 76, 0.7);
+      color: #f0f0f0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 8px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+    
+    .share-btn {
+      background: linear-gradient(135deg, #0088cc, #006699);
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      margin-top: 12px;
+    }
+    
+    .referral-count {
+      background: linear-gradient(135deg, #1a1a3a, #2d2b55);
+      padding: 18px;
+      border-radius: 16px;
+      text-align: center;
+      margin-top: 20px;
+      border: 1px solid rgba(0, 176, 155, 0.15);
+    }
+    
+    .referral-count h3 {
+      font-size: 32px;
+      margin: 8px 0;
+      color: #00b09b;
+    }
+    
+    .earn-text {
+      color: #00b09b;
+    }
+    
+    .pulse {
+      animation: pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .developer-container {
+      position: relative;
+      overflow: hidden;
+      height: 36px;
+      margin-top: 20px;
+      border-radius: 10px;
+      background: rgba(30, 26, 62, 0.4);
+    }
+    
+    .developer-text {
+      position: absolute;
+      white-space: nowrap;
+      font-size: 16px;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.7);
+      text-shadow: 0 0 8px rgba(0, 176, 155, 0.5);
+      padding: 8px 0;
+      animation: slide 15s linear infinite;
+      width: 100%;
+    }
+    
+    @keyframes slide {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    
+    .welcome-content {
+      text-align: center;
+      padding: 25px;
+    }
+    
+    .welcome-content h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #00b09b;
+    }
+    
+    .welcome-content input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 15px;
+      background: rgba(40, 36, 76, 0.5);
+      color: #f0f0f0;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    
+    .confirm-btn {
+      background: linear-gradient(135deg, #00b09b, #96c93d);
+      color: #1a1a2e;
+      border: none;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 12px;
+      width: 100%;
+      cursor: pointer;
+      box-shadow: 0 5px 14px rgba(0, 176, 155, 0.3);
+    }
+    
+    .level-indicator {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .progress-percentage {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 9px;
+      font-weight: bold;
+      color: white;
+      z-index: 2;
+    }
+    
+    .toast {
+      position: fixed;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(30, 26, 62, 0.9);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border-left: 4px solid #00b09b;
+    }
+    
+    .toast.show {
+      opacity: 1;
+    }
+    
+    .ad-result-container {
+      text-align: center;
+      padding: 15px;
+    }
+    
+    .ad-result-container p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+    
+    .ad-watch-btn {
+      background: linear-gradient(135deg, #ff8c00, #ff0080);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+    
+    .popup-content {
+      background: linear-gradient(135deg, #1a1a3a, #2d2b55);
+      border-radius: 18px;
+      padding: 25px;
+      width: 90%;
+      max-width: 380px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(0, 176, 155, 0.15);
+    }
+    
+    .popup-close {
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #00b09b;
+    }
+    
+    .popup-message i {
+      font-size: 40px;
+      color: #00b09b;
+      margin-bottom: 12px;
+    }
+    
+    .popup-message p {
+      font-size: 15px;
+      line-height: 1.6;
+      text-align: left;
+    }
+    
+    .popup-button {
+      background: linear-gradient(135deg, #0088cc, #006699);
+      color: white;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    
+    .withdraw-contact {
+      text-align: center;
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+    
+    .status-pending {
+      color: #ff8c00;
+    }
+    
+    .status-approved {
+      color: #00b09b;
+      font-weight: bold;
+    }
+    
+    @media (max-width: 480px) {
+      .grid {
+        gap: 12px;
+      }
+      
+      .card {
+        padding: 15px 6px;
+      }
+      
+      .app, .ad-page, .referral-page, .notice-page, .withdraw-page, 
+      .settings-page, .support-page, .profile-page, .history-page,
+      .welcome-page {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body id="appBody" class="dark-theme">
+<!-- Welcome Page for New Users -->
+<div class="welcome-page" id="welcomePage">
+  <div class="welcome-content">
+    <h2>স্বাগতম EASY EARN BD</h2>
+    <p>অ্যাপ ব্যবহার শুরু করতে আপনার নাম লিখুন:</p>
+    <input type="text" id="userNameInput" placeholder="আপনার নাম" maxlength="20" />
+    <button class="confirm-btn" onclick="saveUserName()">
+      <i class="fas fa-check"></i> কনফার্ম
+    </button>
+  </div>
+</div>
+
+<!-- Home Page Popup -->
+<div class="popup-overlay hidden" id="popupOverlay">
+  <div class="popup-content">
+    <span class="popup-close" onclick="closePopup()">&times;</span>
+    <div class="popup-message">
+      <i class="fas fa-info-circle"></i>
+      <p>নিয়ম মেনে কাজ করুন ১০০% পেমেন্ট পাবেন। এবং উইথড্র দেয়ার পরে একটা স্ক্রিনশট নিয়ে যে নাম্বারে উইদ্র করছেন সেই নাম্বার সহ টেলিগ্রামে এডমিনের সাথে যোগাযোগ করুন</p>
+    </div>
+    <a href="https://t.me/EAS_YEARN_BD" target="_blank" class="popup-button">
+      <i class="fab fa-telegram"></i> এডমিনের সাথে যোগাযোগ করুন
+    </a>
+  </div>
+</div>
+
+<!-- Main App Pages -->
+<div class="app hidden" id="homePage">
+  <div class="app-name pulse">EASY EARN BD</div>
+  <div class="balance-section">
+    <h2 id="username">Loading...</h2>
+    <p>Balance: <span class="earn-text">৳<span id="balance">0.00</span></span></p>
+    <p>Score: <span class="earn-text"><span id="score">0</span></span> | Level: <span class="earn-text"><span id="level">0</span></span></p>
+    <div class="level-bar">
+      <div class="level-progress" id="levelProgress" style="width: 0%">
+        <div class="progress-percentage" id="progressPercentage">0%</div>
+      </div>
+    </div>
+    <div class="level-indicator">
+      <span>0%</span>
+      <span>100%</span>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card" onclick="goToAdPage()">
+      <i class="fas fa-ad"></i>
+      <span>Watch Ad</span>
+    </div>
+    <div class="card" onclick="goToNoticePage()">
+      <i class="fas fa-bullhorn"></i>
+      <span>Notice</span>
+    </div>
+    <div class="card" onclick="goToProfilePage()">
+      <i class="fas fa-user"></i>
+      <span>Profile</span>
+    </div>
+    <div class="card" onclick="openTelegramChannel()">
+      <i class="fab fa-telegram"></i>
+      <span>Channel</span>
+    </div>
+    <div class="card" onclick="goToWithdrawPage()">
+      <i class="fas fa-wallet"></i>
+      <span>Withdraw</span>
+    </div>
+    <div class="card" onclick="goToHistoryPage()">
+      <i class="fas fa-history"></i>
+      <span>History</span>
+    </div>
+    <div class="card" onclick="goToSupportPage()">
+      <i class="fas fa-headset"></i>
+      <span>Support</span>
+    </div>
+    <div class="card" onclick="goToReferralPage()">
+      <i class="fas fa-user-friends"></i>
+      <span>Refer</span>
+    </div>
+    <div class="card" onclick="goToSettingsPage()">
+      <i class="fas fa-cog"></i>
+      <span>Settings</span>
+    </div>
+  </div>
+</div>
+
+<div class="ad-page hidden" id="adPage">
+  <div class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i> Back</div>
+  <div class="quiz-buttons">
+    <button onclick="loadQuiz()"><i class="fas fa-play-circle"></i> Start Earning</button>
+    <button onclick="loadQuiz()"><i class="fas fa-video"></i> Watch Premium Ad</button>
+  </div>
+  <div class="developer-container">
+    <div class="developer-text">Developer By SABBIR | EASY EARN BD | Earn Money Daily | 100% Free</div>
+  </div>
+</div>
+
+<div class="referral-page hidden" id="referralPage">
+  <div class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i> Back</div>
+  <div class="section-title">
+    <i class="fas fa-user-friends"></i>
+    <h2>Referral Program</h2>
+  </div>
+  <p><strong>Your Referral Link:</strong></p>
+  <div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <input type="text" id="referralLink" readonly />
+    <button class="copy-btn" onclick="copyReferralLink()"><i class="fas fa-copy"></i> Copy</button>
+  </div>
+  <p style="font-size: 14px; margin-bottom: 20px; opacity: 0.8;">Share your referral link and earn ৳0.50 for every friend who joins!</p>
+  <button class="share-btn" onclick="shareOnTelegram()">
+    <i class="fab fa-telegram-plane"></i> Share on Telegram
+  </button>
+  
+  <div class="referral-count">
+    <p><strong>Total Referrals:</strong></p>
+    <h3 id="referralCount">0</h3>
+    <p>Active Users</p>
+  </div>
+</div>
+
+<div class="notice-page hidden" id="noticePage">
+  <div class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i> Back</div>
+  <div class="notice-content">
+    <div class="section-title">
+      <i class="fas fa-bullhorn"></i>
+      <h2>Important Notice</h2>
+    </div>
+    <p><strong class="earn-text">আয়ের সহজ ও নিরাপদ উপায়!*</strong> 💰📲</p>
+    <p>আমাদের <span class="earn-text">EASY EARN BD</span> থেকে আপনি প্রতিদিন সহজ টাস্ক ও অ্যাড দেখে আয় করতে পারেন। ✅</p>
+    <p>শুধু কাজ করুন, আয় করুন এবং সরাসরি <strong>বিকাশ/নগদে</strong> টাকা তুলুন। 🤑</p>
+    <p>কোনো ইনভেস্টমেন্ট লাগবে না — <span class="earn-text">100% ফ্রি প্ল্যাটফর্ম!</span> 🔓</p>
+    <p>🔥 প্রতিদিন লগইন করে রিওয়ার্ড নিন</p>
+    <p>📥 ইনকাম রিপোর্ট চেক করুন</p>
+    <p>💬 <span class="earn-text">সাপোর্ট</span> টিম সবসময় একটিভ</p>
+    <p>👉 বেশি কাজ, বেশি ইনকাম!</p>
+    <p>👉 নিয়মিত ব্যবহার করে নিশ্চিত আয় করুন।</p>
+    <p><em>শুভ কামনা! ❤️</em></p>
+    <p>— আপনার আয়ের সাথী <span class="earn-text">EASY EARN BD</span> ✨</p>
+  </div>
+</div>
+
+<div class="withdraw-page hidden" id="withdrawPage">
+  <div class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i> Back</div>
+  <div class="withdraw-form">
+    <div class="section-title">
+      <i class="fas fa-wallet"></i>
+      <h2>টাকা উত্তোলন করুন</h2>
+    </div>
+    <p>আপনার উপার্জিত টাকা উত্তোলন করতে নিচের ফর্মটি পূরণ করুন:</p>
+    
+    <select id="withdrawMethod">
+      <option value="">পেমেন্ট মেথড নির্বাচন করুন</option>
+      <option value="bkash">বিকাশ</option>
+      <option value="nagad">নগদ</option>
+      <option value="rocket">রকেট</option>
+    </select>
+    
+    <input type="text" id="accountNumber" placeholder="অ্যাকাউন্ট নম্বর (01XXXXXXXXX)" />
+    
+    <input type="number" id="withdrawAmount" placeholder="উত্তোলনের পরিমাণ (৳)" min="25" />
+    
+    <button onclick="submitWithdraw()"><i class="fas fa-paper-plane"></i> উত্তোলন রিকোয়েস্ট করুন</button>
+    
+    <div class="withdraw-contact">
+      <p style="margin-top: 15px; font-size: 14px; color: #ff8c00;">
+        <strong>নোট:</strong> সর্বনিম্ন উত্তোলনের পরিমাণ ৳২৫.০০
+      </p>
+      <p><strong>উত্তোলন রিকোয়েস্ট করার পর আপনার হিস্টোরির স্ক্রিনশট নিয়ে টেলিগ্রামে এডমিনের সাথে যোগাযোগ করুন</strong></p>
+      <a href="https://t.me/EAS_YEARN_BD" target="_blank" class="popup-button">
+        <i class="fab fa-telegram"></i> এডমিনের সাথে যোগাযোগ করুন
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="settings-page hidden" id="settingsPage">
+  <div class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i> Back</div>
+  <div class="theme-options">
+    <div class="section-title">
+      <i class="fas fa-palette"></i>
+      <h2>App Appearance</h2>
+    </div>
+    <p>আপনার পছন্দ অনুযায়ী অ্যাপের থিম পরিবর্তন করুন:</p>
+    
+    <div class="theme-btn light-btn" onclick="setTheme('light')">
+      <i class="fas fa-sun"></i>
+      <span>হালকা থিম</span>
+    </div>
+    
+    <div class="theme-btn dark-btn" onclick="setTheme('dark')">
+      <i class="fas fa-moon"></i>
+      <span>গাঢ় থিম</span>
+    </div>
+  </div>
+</div>
+
+<div class="support-page hidden" id="supportPage">
+  <div class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i> Back</div>
+  <div class="support-options">
+    <div class="section-title">
+      <i class="fas fa-headset"></i>
+      <h2>Support</h2>
+    </div>
+    <p>আপনার সমস্যার সমাধানের জন্য আমাদের সাথে যোগাযোগ করুন:</p>
+    
+    <div class="support-btn" onclick="openTelegramSupport()">
+      <i class="fab fa-telegram"></i>
+      <span>টেলিগ্রাম সাপোর্ট</span>
+    </div>
+    
+    <div class="support-btn" onclick="openEmailSupport()">
+      <i class="fas fa-envelope"></i>
+      <span>ইমেইল সাপোর্ট</span>
+    </div>
+  </div>
+</div>
+
+<div class="profile-page hidden" id="profilePage">
+  <div class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i> Back</div>
+  <div class="user-stats">
+    <div class="section-title">
+      <i class="fas fa-user"></i>
+      <h2>User Profile</h2>
+    </div>
+    <p>আপনার অ্যাপ ব্যবহারের পরিসংখ্যান:</p>
+    
+    <div>
+      <span>ব্যবহারকারীর নাম:</span>
+      <span class="earn-text" id="profileUserName">User Name</span>
+    </div>
+    
+    <div>
+      <span>বিজ্ঞাপন দেখা:</span>
+      <span class="earn-text" id="adsWatched">0</span>
+    </div>
+    
+    <div>
+      <span>বর্তমান ব্যালেন্স:</span>
+      <span class="earn-text">৳<span id="profileUserBalance">0.00</span></span>
+    </div>
+    
+    <div>
+      <span>রেফার করা ডিভাইস:</span>
+      <span class="earn-text" id="referralDevices">0</span>
+    </div>
+    
+    <div>
+      <span>উত্তোলনের সংখ্যা:</span>
+      <span class="earn-text" id="withdrawCount">0</span>
+    </div>
+    
+    <div>
+      <span>ব্যবহৃত পেমেন্ট মাধ্যম:</span>
+      <span class="earn-text" id="paymentMethods">None</span>
+    </div>
+  </div>
+</div>
+
+<div class="history-page hidden" id="historyPage">
+  <div class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i> Back</div>
+  <div>
+    <div class="section-title">
+      <i class="fas fa-history"></i>
+      <h2>Transaction History</h2>
+    </div>
+    <p>আপনার সম্পূর্ণ উত্তোলনের রেকর্ড:</p>
+    
+    <div id="withdrawHistory">
+      <!-- History items will be added here dynamically -->
+    </div>
+    
+    <div class="withdraw-contact">
+      <p>উইথড্র হিস্টোরির স্ক্রিনশট নিয়ে টেলিগ্রামে এডমিনের সাথে যোগাযোগ করুন:</p>
+      <a href="https://t.me/EAS_YEARN_BD" target="_blank" class="popup-button">
+        <i class="fab fa-telegram"></i> এডমিনের সাথে যোগাযোগ করুন
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="quizModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close" onclick="closeQuizModal()">&times;</span>
+    <div class="timer" id="quizTimer">5</div>
+    <div class="quiz-question" id="quizQuestion">প্রশ্ন আসছে...</div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <!-- Ad result container (initially hidden) -->
+    <div class="ad-result-container hidden" id="adResultContainer">
+      <p id="adResultMessage"></p>
+      <button class="ad-watch-btn" id="ad-watch-btn" onclick="startAd()">
+        <i class="fas fa-ad"></i> বিজ্ঞাপন দেখুন
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // Initialize Telegram WebApp
+  let tg;
+  let user;
+  
+  // Initialize all values to 0
+  let balance = 0.00;
+  let score = 0;
+  let level = 0;
+  let referralCount = 0;
+  let adsWatched = 0;
+  let withdrawCount = 0;
+  let paymentMethods = [];
+  let withdrawHistory = [];
+  let userName = "";
+  let quizTimerInterval;
+
+  // Initialize the app
+  function initApp() {
+    // Initialize Telegram - must be first to set `user`
+    initTelegram();
+
+    // Check if we have a saved username
+    const savedUserName = localStorage.getItem('userName');
+    if (savedUserName) {
+      // Hide welcome page and show home page
+      document.getElementById('welcomePage').classList.add('hidden');
+      document.getElementById('homePage').classList.remove('hidden');
+      
+      // Set username
+      userName = savedUserName;
+      document.getElementById("username").innerText = userName;
+      document.getElementById("profileUserName").innerText = userName;
+      
+      // Load saved app state
+      loadAppState();
+      updateBalance();
+      
+      // Show popup
+      showPopup();
+    } else {
+      // Show welcome page for new user
+      document.getElementById('welcomePage').classList.remove('hidden');
+      if (user) {
+        document.getElementById('userNameInput').value = user.first_name;
+      }
+    }
+    
+    // Check for referral in URL
+    checkReferral();
+  }
+  
+  // Show popup function
+  function showPopup() {
+    document.getElementById('popupOverlay').classList.remove('hidden');
+  }
+  
+  // Close popup function
+  function closePopup() {
+    document.getElementById('popupOverlay').classList.add('hidden');
+  }
+  
+  // Check for referral in URL
+  function checkReferral() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const ref = urlParams.get('ref');
+    
+    if (ref) {
+      // Check if this referral has been processed for this device
+      const referralKey = `referral_processed_${ref}`;
+      if (!localStorage.getItem(referralKey)) {
+        // Add referral bonus
+        balance += 0.50;
+        referralCount += 1;
+        
+        // Save state
+        saveAppState();
+        updateBalance();
+        
+        // Mark referral as processed
+        localStorage.setItem(referralKey, 'true');
+        
+        // Show toast notification
+        showToast("রেফারেল সফল! আপনি ৳0.50 পেলেন");
+      }
+    }
+  }
+  
+  // Save user name
+  function saveUserName() {
+    const input = document.getElementById('userNameInput');
+    const name = input.value.trim();
+    
+    if (name === "") {
+      showToast("দয়া করে আপনার নাম লিখুন");
+      return;
+    }
+    
+    // Save user name to localStorage
+    localStorage.setItem('userName', name);
+    userName = name;
+    
+    // Hide welcome page and show home page
+    document.getElementById('welcomePage').classList.add('hidden');
+    document.getElementById('homePage').classList.remove('hidden');
+    
+    // Set username in UI
+    document.getElementById("username").innerText = userName;
+    document.getElementById("profileUserName").innerText = userName;
+    
+    // Initialize app state for new user
+    saveAppState();
+    
+    // Show popup
+    showPopup();
+  }
+  
+  // Load app state from localStorage
+  function loadAppState() {
+    const state = JSON.parse(localStorage.getItem('appState') || '{}');
+    
+    balance = state.balance || 0;
+    score = state.score || 0;
+    level = state.level || 0;
+    referralCount = state.referralCount || 0;
+    adsWatched = state.adsWatched || 0;
+    withdrawCount = state.withdrawCount || 0;
+    paymentMethods = state.paymentMethods || [];
+    withdrawHistory = state.withdrawHistory || [];
+  }
+  
+  // Save app state to localStorage
+  function saveAppState() {
+    const state = {
+      balance,
+      score,
+      level,
+      referralCount,
+      adsWatched,
+      withdrawCount,
+      paymentMethods,
+      withdrawHistory
+    };
+    
+    localStorage.setItem('appState', JSON.stringify(state));
+  }
+  
+  function initTelegram() {
+    // Check if Telegram WebApp is available
+    if (window.Telegram && window.Telegram.WebApp) {
+      tg = window.Telegram.WebApp;
+      tg.ready();
+      user = tg.initDataUnsafe?.user;
+      console.log("Telegram WebApp initialized");
+    } else {
+      console.log("Telegram WebApp not detected");
+    }
+  }
+  
+  // Generate unique referral link based on user name
+  function generateReferralLink() {
+    if (!userName) return "";
+    return `${window.location.origin}${window.location.pathname}?ref=${encodeURIComponent(userName)}`;
+  }
+
+  // Get or create device ID
+  let deviceId = localStorage.getItem('deviceId');
+  if (!deviceId) {
+    deviceId = 'device-' + Math.random().toString(36).substr(2, 9) + '-' + Date.now().toString(36);
+    localStorage.setItem('deviceId', deviceId);
+    console.log("Generated new device ID:", deviceId);
+  }
+
+  // Load saved theme
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    setTheme(savedTheme);
+  } else {
+    setTheme('dark');
+  }
+
+  const quizList = [
+    { question: "বাংলাদেশের রাজধানী কোনটি?", options: ["চট্টগ্রাম", "ঢাকা", "রাজশাহী", "খুলনা"], answer: "ঢাকা" },
+    { question: "৫ x ৬ = ?", options: ["৩০", "২৫", "৩৫", "৪০"], answer: "৩০" },
+    { question: "সবচেয়ে বড় মহাসাগর কোনটি?", options: ["আটলান্টিক", "প্যাসিফিক", "ভারত", "আর্কটিক"], answer: "প্যাসিফিক" },
+    { question: "বাংলাদেশ কবে স্বাধীনতা লাভ করে?", options: ["১৯৭১", "১৯৭৫", "১৯৪৭", "১৯৯০"], answer: "১৯৭১" },
+    { question: "বর্তমানে বাংলাদেশের প্রধানমন্ত্রী কে?", options: ["খালেদা জিয়া", "শেখ হাসিনা", "এরশাদ", "জিয়া রহমান"], answer: "শেখ হাসিনা" },
+    { question: "সূর্যের সবচেয়ে কাছের গ্রহ কোনটি?", options: ["বুধ", "শুক্র", "পৃথিবী", "মঙ্গল"], answer: "বুধ" },
+    { question: "বাংলাদেশের জাতীয় পশু কোনটি?", options: ["বাঘ", "হাতি", "ঘোড়া", "ভাল্লুক"], answer: "বাঘ" },
+    { question: "জলীয় বাষ্প জমে কী তৈরি হয়?", options: ["তুষার", "কুয়াশা", "বৃষ্টি", "সাগর"], answer: "কুয়াশা" },
+    { question: "পৃথিবীর সবচেয়ে বড় মহাদেশ কোনটি?", options: ["ইউরোপ", "এশিয়া", "আফ্রিকা", "দক্ষিণ আমেরিকা"], answer: "এশিয়া" },
+    { question: "বাংলাদেশের মুদ্রার নাম কী?", options: ["রুপি", "টাকা", "ডলার", "ইউরো"], answer: "টাকা" },
+    { question: "গ্রামাঞ্চলের মানুষ প্রধানত কী কাজ করে?", options: ["মৎস্য শিকার", "চাষাবাদ", "শিক্ষকতা", "ব্যবসা"], answer: "চাষাবাদ" },
+    { question: "আব্রাহাম লিংকন কোন দেশের রাষ্ট্রপতি ছিলেন?", options: ["যুক্তরাজ্য", "বাংলাদেশ", "যুক্তরাষ্ট্র", "জাপান"], answer: "যুক্তরাষ্ট্র" },
+    { question: "রবীন্দ্রনাথ ঠাকুর কোন ভাষায় লিখতেন?", options: ["হিন্দি", "বাংলা", "ইংরেজি", "উর্দু"], answer: "বাংলা" },
+    { question: "কম্পিউটারের জনক কাকে বলা হয়?", options: ["আইজ্যাক নিউটন", "চার্লস ব্যাবেজ", "টমাস এডিসন", "আলবার্ট আইনস্টাইন"], answer: "চার্লস ব্যাবেজ" },
+    { question: "এক ডজন মানে কত?", options: ["৬", "১০", "১২", "২০"], answer: "১২" },
+    { question: "দক্ষিণ মেরুতে সবচেয়ে বেশি দেখা যায় কোন প্রাণী?", options: ["সিংহ", "ভাল্লুক", "পেঙ্গুইন", "হরিণ"], answer: "পেঙ্গুইন" },
+    { question: "সূর্য কোথা থেকে উঠে?", options: ["পশ্চিম", "উত্তর", "পূর্ব", "দক্ষিণ"], answer: "পূর্ব" },
+    { question: "বাংলাদেশের জাতীয় ফুল কী?", options: ["গোলাপ", "শাপলা", "জুঁই", "সূর্যমুখী"], answer: "শাপলা" },
+    { question: "সমুদ্রের পানির স্বাদ কেমন?", options: ["মিষ্টি", "লবণাক্ত", "ফিকে", "ঝাল"], answer: "লবণাক্ত" },
+    { question: "প্রথম মানুষ চাঁদে অবতরণ করেন কবে?", options: ["১৯৬৯", "১৯৭৫", "১৯৮০", "১৯৫০"], answer: "১৯৬৯" }
+  ];
+
+  function updateBalance() {
+    document.getElementById("balance").innerText = balance.toFixed(2);
+    document.getElementById("score").innerText = score;
+    document.getElementById("level").innerText = level;
+    document.getElementById("profileUserBalance").innerText = balance.toFixed(2);
+    document.getElementById("adsWatched").innerText = adsWatched;
+    document.getElementById("referralDevices").innerText = referralCount;
+    document.getElementById("withdrawCount").innerText = withdrawCount;
+    document.getElementById("paymentMethods").innerText = paymentMethods.join(", ") || "None";
+    document.getElementById("referralCount").innerText = referralCount;
+    updateLevelProgress();
+    saveAppState();
+  }
+  
+  function updateLevelProgress() {
+    const progress = (score % 20) * 5;
+    document.getElementById("levelProgress").style.width = `${progress}%`;
+    document.getElementById("progressPercentage").innerText = `${progress}%`;
+  }
+
+  function goToNoticePage() {
+    document.getElementById("homePage").classList.add("hidden");
+    document.getElementById("noticePage").classList.remove("hidden");
+  }
+
+  function goToWithdrawPage() {
+    document.getElementById("homePage").classList.add("hidden");
+    document.getElementById("withdrawPage").classList.remove("hidden");
+  }
+
+  function goToSettingsPage() {
+    document.getElementById("homePage").classList.add("hidden");
+    document.getElementById("settingsPage").classList.remove("hidden");
+  }
+
+  function goToSupportPage() {
+    document.getElementById("homePage").classList.add("hidden");
+    document.getElementById("supportPage").classList.remove("hidden");
+  }
+
+  function goToProfilePage() {
+    document.getElementById("homePage").classList.add("hidden");
+    document.getElementById("profilePage").classList.remove("hidden");
+    updateBalance();
+  }
+
+  function goToHistoryPage() {
+    document.getElementById("homePage").classList.add("hidden");
+    document.getElementById("historyPage").classList.remove("hidden");
+    updateWithdrawHistory();
+  }
+
+  function openTelegramChannel() {
+    window.open("https://t.me/EAS_YEARN_BD", "_blank");
+  }
+
+  function openTelegramSupport() {
+    window.open("https://t.me/EAS_YEARN_BD", "_blank");
+  }
+
+  function openEmailSupport() {
+    window.location.href = "mailto:support@easyearnbd.com";
+  }
+
+  function goToAdPage() {
+    document.getElementById("homePage").classList.add("hidden");
+    document.getElementById("adPage").classList.remove("hidden");
+  }
+
+  function goHome() {
+    document.getElementById("homePage").classList.remove("hidden");
+    document.getElementById("adPage").classList.add("hidden");
+    document.getElementById("referralPage").classList.add("hidden");
+    document.getElementById("noticePage").classList.add("hidden");
+    document.getElementById("withdrawPage").classList.add("hidden");
+    document.getElementById("settingsPage").classList.add("hidden");
+    document.getElementById("supportPage").classList.add("hidden");
+    document.getElementById("profilePage").classList.add("hidden");
+    document.getElementById("historyPage").classList.add("hidden");
+    showPopup();
+  }
+
+  function goToReferralPage() {
+    document.getElementById("homePage").classList.add("hidden");
+    document.getElementById("referralPage").classList.remove("hidden");
+    const referralLink = generateReferralLink();
+    document.getElementById("referralLink").value = referralLink;
+    document.getElementById("referralCount").innerText = referralCount;
+  }
+
+  function copyReferralLink() {
+    const input = document.getElementById("referralLink");
+    input.select();
+    input.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    const btn = document.querySelector('.copy-btn');
+    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+    }, 2000);
+    showToast("Referral link copied to clipboard!");
+  }
+
+  function shareOnTelegram() {
+    const link = document.getElementById("referralLink").value;
+    const text = encodeURIComponent("🚀 Join EASY EARN BD and earn rewards! " + link);
+    window.open(`https://t.me/share/url?url=${text}`, "_blank");
+  }
+
+  // Function to show ad result message and button
+  function showAdPrompt(message) {
+    document.getElementById("quizTimer").classList.add("hidden");
+    document.getElementById("quizQuestion").classList.add("hidden");
+    document.getElementById("quizOptions").classList.add("hidden");
+    document.getElementById("adResultMessage").innerText = message;
+    document.getElementById("adResultContainer").classList.remove("hidden");
+  }
+
+  // Start watching an ad
+  function startAd() {
+    // Hide the ad prompt
+    document.getElementById("adResultContainer").classList.add("hidden");
+    
+    // Show a loading message
+    showToast("বিজ্ঞাপন লোড হচ্ছে...");
+    
+    // Call the ad SDK
+    if (typeof show_9697264 === 'function') {
+      show_9697264().then(() => {
+        // Reward the user
+        balance += 0.20;
+        adsWatched += 1;
+        updateBalance();
+        showToast("✅ বিজ্ঞাপন দেখার জন্য ধন্যবাদ! আপনি ৳0.20 পেলেন");
+        
+        // Close the quiz modal
+        closeQuizModal();
+      }).catch(error => {
+        console.error('Ad error:', error);
+        showToast("❌ বিজ্ঞাপন লোড করতে সমস্যা হয়েছে। আবার চেষ্টা করুন");
+        // Show the ad prompt again so they can retry
+        document.getElementById("adResultContainer").classList.remove("hidden");
+      });
+    } else {
+      showToast("❌ বিজ্ঞাপন সেবা এখন পাওয়া যাচ্ছে না");
+      document.getElementById("adResultContainer").classList.remove("hidden");
+    }
+  }
+
+  // Modified quiz answer handler
+  function setupQuizAnswerHandler(btn, opt, quiz) {
+    btn.onclick = () => {
+      clearInterval(quizTimerInterval);
+      
+      if (opt === quiz.answer) {
+        // Correct answer - give 0.002 BDT
+        balance += 0.002;
+        score += 1;
+        adsWatched += 1;
+        if (score % 20 === 0) level += 1;
+        updateBalance();
+        
+        // Show ad prompt for correct answer
+        showAdPrompt("✅ সঠিক উত্তর! আপনি ৳0.002 পেলেন। বিজ্ঞাপন দেখে অতিরিক্ত ৳0.20 উপার্জন করুন");
+      } else {
+        // Wrong answer
+        adsWatched += 1;
+        updateBalance();
+        
+        // Show ad prompt for wrong answer
+        showAdPrompt("❌ ভুল উত্তর! পরের বার চেষ্টা করুন। বিজ্ঞাপন দেখে ৳0.20 উপার্জন করুন");
+      }
+    };
+  }
+
+  function loadQuiz() {
+    const quiz = quizList[Math.floor(Math.random() * quizList.length)];
+    document.getElementById("quizModal").classList.remove("hidden");
+    document.getElementById("quizQuestion").innerText = quiz.question;
+    
+    // Reset ad result container
+    document.getElementById("adResultContainer").classList.add("hidden");
+    document.getElementById("quizTimer").classList.remove("hidden");
+    document.getElementById("quizQuestion").classList.remove("hidden");
+    document.getElementById("quizOptions").classList.remove("hidden");
+
+    const optionsEl = document.getElementById("quizOptions");
+    optionsEl.innerHTML = "";
+
+    quiz.options.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.innerText = opt;
+      setupQuizAnswerHandler(btn, opt, quiz);
+      optionsEl.appendChild(btn);
+    });
+
+    startQuizTimer();
+  }
+
+  function startQuizTimer() {
+    let timeLeft = 5;
+    const timerEl = document.getElementById("quizTimer");
+    timerEl.innerText = timeLeft;
+
+    quizTimerInterval = setInterval(() => {
+      timeLeft--;
+      timerEl.innerText = timeLeft;
+
+      if (timeLeft <= 0) {
+        clearInterval(quizTimerInterval);
+        showToast("🕒 সময় শেষ! পরের বার চেষ্টা করুন");
+        adsWatched += 1;
+        updateBalance();
+        closeQuizModal();
+      }
+    }, 1000);
+  }
+
+  function closeQuizModal() {
+    document.getElementById("quizModal").classList.add("hidden");
+    clearInterval(quizTimerInterval);
+    document.getElementById("quizTimer").classList.remove("hidden");
+    document.getElementById("quizQuestion").classList.remove("hidden");
+    document.getElementById("quizOptions").classList.remove("hidden");
+    document.getElementById("adResultContainer").classList.add("hidden");
+  }
+
+  function submitWithdraw() {
+    const method = document.getElementById("withdrawMethod").value;
+    const account = document.getElementById("accountNumber").value;
+    const amount = parseFloat(document.getElementById("withdrawAmount").value);
+    
+    if (!method) {
+      showToast("পেমেন্ট মেথড নির্বাচন করুন");
+      return;
+    }
+    
+    if (!account || account.length < 11) {
+      showToast("সঠিক অ্যাকাউন্ট নম্বর দিন");
+      return;
+    }
+    
+    if (!amount || amount < 25) {
+      showToast("সর্বনিম্ন উত্তোলনের পরিমাণ ৳২৫");
+      return;
+    }
+    
+    if (amount > balance) {
+      showToast("আপনার ব্যালেন্স যথেষ্ট নয়");
+      return;
+    }
+    
+    balance -= amount;
+    withdrawCount += 1;
+    if (!paymentMethods.includes(method)) {
+      paymentMethods.push(method);
+    }
+    
+    // Add to withdraw history
+    const now = new Date();
+    const historyItem = {
+      method: method,
+      account: account,
+      amount: amount,
+      date: now.toLocaleDateString('bn-BD'),
+      time: now.toLocaleTimeString('bn-BD'),
+      status: "Pending"
+    };
+    withdrawHistory.push(historyItem);
+    
+    updateBalance();
+    showToast("✅ আপনার উত্তোলন রিকোয়েস্ট জমা হয়েছে! ২৪ ঘন্টার মধ্যে টাকা পেয়ে যাবেন");
+    saveAppState();
+    goHome();
+  }
+
+  function updateWithdrawHistory() {
+    const historyContainer = document.getElementById("withdrawHistory");
+    historyContainer.innerHTML = "";
+    
+    if (withdrawHistory.length === 0) {
+      historyContainer.innerHTML = '<div class="history-item"><p>কোনো উত্তোলনের ইতিহাস পাওয়া যায়নি</p></div>';
+      return;
+    }
+    
+    withdrawHistory.forEach((item, index) => {
+      const historyItem = document.createElement("div");
+      historyItem.className = "history-item";
+      
+      let status = item.status;
+      let statusClass = "status-pending";
+      
+      // Randomly approve some withdrawals for demo
+      if (index > withdrawHistory.length - 3 && Math.random() > 0.5) {
+        status = "Approved";
+        statusClass = "status-approved";
+      }
+      
+      historyItem.innerHTML = `
+        <div>
+          <span>পেমেন্ট মাধ্যম:</span>
+          <span class="earn-text">${getMethodName(item.method)}</span>
+        </div>
+        <div>
+          <span>অ্যাকাউন্ট নম্বর:</span>
+          <span>${item.account}</span>
+        </div>
+        <div>
+          <span>পরিমাণ:</span>
+          <span class="earn-text">৳${item.amount.toFixed(2)}</span>
+        </div>
+        <div>
+          <span>তারিখ:</span>
+          <span>${item.date}</span>
+        </div>
+        <div>
+          <span>সময়:</span>
+          <span>${item.time}</span>
+        </div>
+        <div>
+          <span>স্ট্যাটাস:</span>
+          <span class="${statusClass}">${status}</span>
+        </div>
+      `;
+      
+      historyContainer.appendChild(historyItem);
+    });
+  }
+
+  function getMethodName(method) {
+    switch(method) {
+      case 'bkash': return 'বিকাশ';
+      case 'nagad': return 'নগদ';
+      case 'rocket': return 'রকেট';
+      default: return method;
+    }
+  }
+
+  function setTheme(theme) {
+    const body = document.getElementById("appBody");
+    body.className = theme + '-theme';
+    localStorage.setItem('theme', theme);
+    showToast(`Theme changed to ${theme === 'dark' ? 'গাঢ় থিম' : 'হালকা থিম'}`);
+  }
+  
+  // Show toast notification
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+  }
+  
+  // Initialize app
+  initApp();
+</script>
+</body>
+</html>
